@@ -27,16 +27,13 @@ def eval_gridsearch(model_name, clf, param_grid, X_train, y_train, X_test, y_tes
 
     preds = best_estimator.predict(X_test)
     
-    try:
-        probs = best_estimator.predict_proba(X_test)
+    probs = best_estimator.predict_proba(X_test)
 
-        # Multiclass ROC (micro-average)
-        classes = np.unique(y_test)
-        y_bin = label_binarize(y_test, classes=classes)
+    # Multiclass ROC (micro-average)
+    classes = np.unique(y_test)
+    y_bin = label_binarize(y_test, classes=classes)
 
-        fpr, tpr, _ = roc_curve(y_bin.ravel(), probs.ravel())
-    except AttributeError:
-        fpr, tpr = None, None
+    fpr, tpr, _ = roc_curve(y_bin.ravel(), probs.ravel())
 
     acc = accuracy_score(y_test, preds)
     f1 = f1_score(y_test, preds, average='macro')

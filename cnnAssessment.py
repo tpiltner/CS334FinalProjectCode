@@ -11,6 +11,8 @@ import pandas as pd
 import time
 
 def main():
+    device = torch.device("cpu")
+    
     # Constants
     train_dir = "Training"
     test_dir = "Testing"

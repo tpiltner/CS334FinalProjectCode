@@ -60,7 +60,7 @@ def eval_gridsearch(model_name, clf, param_grid, X_train, y_train, X_test, y_tes
 
 def kfold_cv(model, X, y, k=5):
     start_time = time.time()
-    kf = KFold(n_splits=k, shuffle=True, random_state=42)
+    kf = KFold(n_splits=k, shuffle=True)
 
     # ROC AUC and F1 scores for multi-class
     train_auc = np.mean(cross_val_score(model, X, y, cv=kf, scoring='roc_auc_ovr', n_jobs=-1))
@@ -116,7 +116,7 @@ def main():
         "max_depth": [5, 10, 20],
         "min_samples_split": [2, 5, 10]
     }
-    dt_clf = DecisionTreeClassifier(random_state=42)
+    dt_clf = DecisionTreeClassifier()
     results.append(eval_gridsearch("Decision Tree", dt_clf, dt_params,
                                 X_train, y_train, X_test, y_test))
 
@@ -127,7 +127,7 @@ def main():
     "learning_rate": [0.01, 0.05, 0.1]
     }
 
-    xgb_clf = xgb.XGBClassifier(eval_metric='mlogloss', random_state=42)
+    xgb_clf = xgb.XGBClassifier(eval_metric='mlogloss')
     results.append(eval_gridsearch("XGBoost", xgb_clf, xgb_params,
                                    X_train, y_train, X_test, y_test))
 

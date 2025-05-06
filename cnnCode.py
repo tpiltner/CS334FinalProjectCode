@@ -14,6 +14,8 @@ from tqdm import tqdm
 
 plt.rcParams.update({'axes.prop_cycle': plt.cycler(color=['cornflowerblue', 'hotpink'])})
 
+device = torch.device("cpu")
+
 if __name__ == "__main__":
     train_dir = "Training"
     test_dir = "Testing"
@@ -32,7 +34,7 @@ if __name__ == "__main__":
     # Split trainset into train/val (80/20)
     val_size = int(0.2 * len(full_trainset))
     train_size = len(full_trainset) - val_size
-    trainset, valset = random_split(full_trainset, [train_size, val_size], generator=torch.Generator().manual_seed(42))
+    trainset, valset = random_split(full_trainset, [train_size, val_size])
 
     learning_rates = [0.01, 0.001, 0.0001]
     epochs_list = [1, 2, 3]

@@ -21,7 +21,7 @@ def get_resnet_model(num_classes):
 
 def kfold_cv_cnn(model_fn, dataset, num_classes, params, k=5, device='cpu'):
     start_time = time.time()
-    kf = KFold(n_splits=k, shuffle=True, random_state=42)
+    kf = KFold(n_splits=k, shuffle=True)
 
     y_true_all = []
     y_pred_all = []

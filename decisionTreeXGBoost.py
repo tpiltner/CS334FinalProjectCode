@@ -219,7 +219,7 @@ def main():
     for res in results:
         if res['model'] == "XGBoost":
             best_params = res['best_params']
-            xgb_best = xgb.XGBClassifier(**best_params, random_state=42, eval_metric='mlogloss')
+            xgb_best = xgb.XGBClassifier(**best_params, eval_metric='mlogloss')
                 
             # Refit on the full training set to visualize training loss only
             xgb_best.fit(
@@ -248,12 +248,12 @@ def main():
 
     # Cross-validation for Decision Tree
     best_dt_params = results[0]['best_params']
-    dt_cv_model = DecisionTreeClassifier(**best_dt_params, random_state=42)
+    dt_cv_model = DecisionTreeClassifier(**best_dt_params)
     dt_cv = kfold_cv(dt_cv_model, X_train, y_train, k=5)
 
     # Cross-validation for XGBoost
     best_xgb_params = results[1]['best_params']
-    xgb_cv_model = xgb.XGBClassifier(**best_xgb_params, eval_metric='mlogloss', random_state=42)
+    xgb_cv_model = xgb.XGBClassifier(**best_xgb_params, eval_metric='mlogloss')
     xgb_cv = kfold_cv(xgb_cv_model, X_train, y_train, k=5)
 
     # Print as DataFrame

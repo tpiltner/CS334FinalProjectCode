@@ -113,8 +113,6 @@ def kfold_cv_cnn(model_fn, dataset, num_classes, params, k=5, device='cpu'):
 
 
 if __name__ == "__main__":
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
     transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),

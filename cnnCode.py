@@ -14,8 +14,6 @@ from tqdm import tqdm
 
 plt.rcParams.update({'axes.prop_cycle': plt.cycler(color=['cornflowerblue', 'hotpink'])})
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 if __name__ == "__main__":
     train_dir = "Training"
     test_dir = "Testing"

@@ -11,9 +11,6 @@ import pandas as pd
 import time
 
 def main():
-    # Set device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
     # Constants
     train_dir = "Training"
     test_dir = "Testing"
